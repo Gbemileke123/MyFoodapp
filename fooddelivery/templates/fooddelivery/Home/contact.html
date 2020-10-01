@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% block content %}
+
+    <h1>Contact Form</h1>
+    <h3>Fill in your Contact Information here.</h3>
+
+    <main>
+        <form>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" class="form-control">
+
+            <label for="subject">Subject</label>
+            <input type="text" name="subject" class="form-control">
+
+            <div id="terms">
+                <label for="message">Message</label>
+                <textarea class="form-control">Message</textarea>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </main>
+
+{% endblock %}
