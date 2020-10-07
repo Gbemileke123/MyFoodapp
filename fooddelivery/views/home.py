@@ -1,4 +1,5 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render
+
 from fooddelivery.service_factory import fooddelivery_service_container
 
 
@@ -6,7 +7,8 @@ def home_page(request):
     menu = fooddelivery_service_container.menu_management_service().list()
     context = {
         "title": "Home",
-        'menu': menu
+        'menu': menu,
+        'logged_in': request.user.is_authenticated
     }
     return render(request, "fooddelivery/Home/home.html", context)
 

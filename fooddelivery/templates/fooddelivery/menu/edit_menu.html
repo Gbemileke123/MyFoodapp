@@ -35,6 +35,12 @@
                                 <input type="text" id="date_of_creation" name="date_of_creation" value="{{ menu.date_of_creation }}"
                                        class="form-control"/>
                             </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="image_url">Image Url:</label>
+                                <input type="url" id="image_url" name="image_url" value="{{ menu.image_url }}"
+                                       class="form-control"/>
+                            </div>
                         </div>
                         <div class="card-footer">
                             <a class="card-link" href="{% url "home_menu" %}">Back to list</a>

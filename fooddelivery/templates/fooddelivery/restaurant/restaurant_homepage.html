@@ -60,7 +60,8 @@
                         </div>
                         <div class="card-body">
                             <a href="{% url 'view_menuitem' e.id %}">
-                                <img src="{% static 'img/menu18.jpg' %}" class="card-img">
+                                <img src="{{ e.image_url }}" alt="{{ e.item_name }} Image"
+                                class="img-fliud card-img">
                             </a>
 
                         </div>

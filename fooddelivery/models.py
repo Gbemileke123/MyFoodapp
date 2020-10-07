@@ -19,7 +19,7 @@ class Menu(models.Model):
     image_url = models.URLField(max_length=500)
 
     def __str__(self):
-        return f"{self.menu_version}: {self.other_details}\t{self.date_of_creation}"
+        return f"{self.menu_version}: {self.other_details}\t{self.date_of_creation}\t{self.image_url}"
 
 
 class MenuItem(models.Model):
@@ -28,9 +28,10 @@ class MenuItem(models.Model):
     item_description = models.CharField(max_length=150)
     item_price = models.DecimalField(max_digits=50, decimal_places=5)
     other_details = models.CharField(max_length=150)
+    image_url = models.URLField(max_length=500)
 
     def __str__(self):
-        return f"{self.menu}: {self.item_name}\t{self.item_description}\t{self.item_price}\t{self.other_details}"
+        return f"{self.menu}: {self.item_name}\t{self.item_description}\t{self.item_price}\t{self.other_details}\t{self.image_url}"
 
 
 class Restaurant(models.Model):

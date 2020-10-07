@@ -1,6 +1,8 @@
 from abc import ABCMeta, abstractmethod
 from typing import List, Dict
 
+from django.db.models import Q
+
 from fooddelivery.dto.CommonDto import SelectOptionDto
 from fooddelivery.dto.MenuItemDto import CreateMenuItemDto, EditMenuItemDto, ListMenuItemDto, SearchMenuItemDto, \
     MenuItemDetailsDto
@@ -39,7 +41,7 @@ class MenuItemRepository(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def search(self, item_name: str, item_description: str, item_price: float, other_details: str):
+    def search(self, filter: str):
         """Search a menuitem"""
         raise NotImplementedError
 
@@ -56,11 +58,12 @@ class DjangoORMMenuItemRepository(MenuItemRepository):
         menuitem.item_description = model.item_description
         menuitem.item_price = model.item_price
         menuitem.other_details = model.other_details
+        menuitem.image_url = model.image_url
         menuitem.save()
 
     def edit(self, id: int, model: EditMenuItemDto):
         try:
-            menuitem = MenuItem.objects.get(id=_id)
+            menuitem = MenuItem.objects.get(id=id)
             menuitem.menu_id = model.menu_id
             menuitem.item_name = model.item_name
             menuitem.item_description = model.item_description
@@ -78,7 +81,8 @@ class DjangoORMMenuItemRepository(MenuItemRepository):
                                                 "item_name",
                                                 "item_description",
                                                 "item_price",
-                                                "other_details"
+                                                "other_details",
+                                                "image_url"
                                                 ))
         result: List[ListMenuItemDto] = []
         for e in menuitem:
@@ -89,6 +93,7 @@ class DjangoORMMenuItemRepository(MenuItemRepository):
             item.item_price = e["item_price"]
             item.other_details = e["other_details"]
             item.menu_version = e['menu__menu_version']
+            item.image_url = e['image_url']
 
             result.append(item)
         return result
@@ -118,16 +123,10 @@ class DjangoORMMenuItemRepository(MenuItemRepository):
             print(message)
             raise e
 
-    def search(self, item_name: str, item_description: str, item_price: float, other_details: str) -> List[SearchMenuItemDto]:
+    def search(self, filter: str) -> List[SearchMenuItemDto]:
         menuitem = MenuItem.objects
-        if menuitem is not None:
-            menuitem = menuitem.filter(item_name=item_name)
-        if menuitem is not None:
-            menuitem = menuitem.filter(item_description=item_description)
-        if menuitem is not None:
-            menuitem = menuitem.filter(item_price=item_price)
-        if menuitem is not None:
-            menuitem = menuitem.filter(other_details=other_details)
+        if filter is not None:
+            menuitem = menuitem.filter(Q(item_name__contains=filter) | Q(item_description__contains=filter))
 
         menuitem = list(menuitem)
         result = []

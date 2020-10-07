@@ -19,6 +19,8 @@ def login_page(request):
         login(request, user)
         if user.groups.filter(name__exact="Restaurant").exists():
             return redirect("restaurant_homepage")
+        elif user.groups.filter(name__exact="Customer").exists():
+            return redirect("home")
         elif user.groups.filter(name__exact="Staff").exists():
             return redirect("home_staff")
     else:

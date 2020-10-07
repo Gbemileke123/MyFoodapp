@@ -48,6 +48,7 @@ class DjangoORMMenuRepository(MenuRepository):
         menu.menu_version = model.menu_version
         menu.other_details = model.other_details
         menu.date_of_creation = model.date_of_creation
+        menu.image_url = model.image_url
         menu.save()
 
     def edit(self, menu_id: int, model: EditMenuDto):
@@ -55,7 +56,7 @@ class DjangoORMMenuRepository(MenuRepository):
             menu = Menu.objects.get(id=menu_id)
             menu.menu_version = model.menu_version
             menu.other_details = model.other_details
-
+            menu.image_url = model.image_url
             menu.save()
 
         except Menu.DoesNotExist as m:

@@ -19,6 +19,7 @@ def home_menu(request):
     return render(request, "fooddelivery/menu/home_menu.html", context)
 
 
+@login_required(login_url='login')
 def view_menu(request, menu_id):
     menu = __get_menu_details_dto_or_raise_404(menu_id)
     context = {

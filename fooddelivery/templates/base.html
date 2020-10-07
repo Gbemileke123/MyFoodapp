@@ -60,12 +60,15 @@
                        aria-haspopup="true" aria-expanded="false">Admin</a>
                     <div class="dropdown-menu" aria-labelledby="dropdown04">
                         <a class="dropdown-item" href="{% url 'staff_homepage' %}">Staff</a>
-
                     </div>
                 </li>
                 <li class="nav-item"><a href="{% url 'restaurant_homepage' %}" class="nav-link">Restaurant</a></li>
-                <li class="nav-item"><a href= "{% url 'create_customer' %}"  class="nav-link">Register</a></li>
+                {% if logged_in %}
+                    <li class="nav-item"><a href= "{% url 'logout' %}"  class="nav-link">Logout</a></li>
+                {% else %}
+                    <li class="nav-item"><a href= "{% url 'create_customer' %}"  class="nav-link">Register</a></li>
                     <li class="nav-item"><a  href="{% url 'login' %}" class="nav-link">login</a></li>
+                {% endif %}
             </ul>
         </div>
     </div>
@@ -78,8 +81,10 @@
         <div class="row">
             <div class="col-md-12 text-center">
                 <p>
-                    Copyright &copy; O'Gabs Deliver All rights reserved
+                    Copyright &copy; O'Gabs Deliver All rights reserved| Contact: 08161807670
                 </p>
+
+
             </div>
         </div>
     </div>

@@ -4,6 +4,7 @@ class CreateMenuItemDto:
     item_description: str
     item_price: float
     other_details: str
+    image_url: str
 
 
 class EditMenuItemDto:
@@ -13,6 +14,7 @@ class EditMenuItemDto:
     item_description: str
     item_price: float
     other_details: str
+    image_url: str
 
 
 class ListMenuItemDto:
@@ -22,6 +24,7 @@ class ListMenuItemDto:
     item_description: str
     item_price: float
     other_details: str
+    image_url: str
 
 
 class MenuItemDetailsDto:
@@ -31,6 +34,7 @@ class MenuItemDetailsDto:
     item_description: str
     item_price: float
     other_details: str
+    image_url: str
 
 
 class SearchMenuItemDto:

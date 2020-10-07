@@ -99,68 +99,33 @@
 
     <div class="container-fluid bg-light p-5">
 
-    <div class="row mt-3 mb-3">
+        <div class="row mt-3 mb-3">
 
-        <div class="col-12">
-            <h1 class="text-center font-weight-bold">OUR MENU</h1>
+            <div class="col-12">
+                <h1 class="text-center font-weight-bold">OUR MENU</h1>
+            </div>
+
         </div>
 
-    </div>
 
+        <div class="container">
+            <div class="row">
+                {% for m in menu %}
+                    <div class="col-md-4">
 
-    <div class="container">
-        <div class="row">
-            {% for m in menu %}
-                <div class="col-md-4">
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h2 class="card-title">{{ m.menu_version }}</h2>
+                        <div class="card">
+                            <div class="card-header">
+                                <h2 class="card-title">{{ m.menu_version }}</h2>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <a href="{% url 'view_menu' menu_id=m.id %}">
+                                <img src="{{ m.image_url }}" alt="{{ m.menu_version }} Image"
+                                     class="img-fliud card-img">
+                            </a>
                         </div>
                     </div>
-                    <div class="card-body">
-                        <a href="{% url 'view_menu' menu_id=m.id %}" >
-                            <img src="{% static 'img/{{ m. }}' %}" class="img-fliud" style="width: 500px">
-                        </a>
-                    </div>
-                </div>
-            {% endfor %}
+                {% endfor %}
+            </div>
         </div>
-    </div>
-
-
-    {#        <div class="row mb-3 destination-img">#}
-    {##}
-    {#            <div class="col-4">#}
-    {#                <img src="{% static 'img/food4.jpg' %}" class="img-fluid img-thumbnail">#}
-    {#            </div>#}
-    {##}
-    {#            <div class="col-4">#}
-    {#                <img src="{% static 'img/food9.jpg' %}" class="img-fluid img-thumbnail">#}
-    {#            </div>#}
-    {##}
-    {#            <div class="col-4">#}
-    {#                <img src="{% static 'img/food14.jpg' %}" class="img-fluid img-thumbnail">#}
-    {#            </div>#}
-    {##}
-    {#        </div>#}
-    {##}
-    {#        <div class="row mb-3 destination-img">#}
-    {##}
-    {#            <div class="col-4">#}
-    {#                <img src="{% static 'img/food10.jpg' %}" class="img-fluid img-thumbnail">#}
-    {#            </div>#}
-    {##}
-    {#            <div class="col-4">#}
-    {#                <img src="{% static 'img/food6.jpg' %}" class="img-fluid img-thumbnail">#}
-    {#            </div>#}
-    {##}
-    {#            <div class="col-4">#}
-    {#                <img src="{% static 'img/food13.jpg' %}" class="img-fluid img-thumbnail">#}
-    {#            </div>#}
-    {##}
-    {#        </div>#}
-    {##}
-    {#    </div>#}
-
 {% endblock %}
