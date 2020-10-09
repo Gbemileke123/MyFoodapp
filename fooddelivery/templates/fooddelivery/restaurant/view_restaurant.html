@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if restaurant %}
+        <div class="row">
+            <div class="col-md-8 offset-2">
+                <div class="card p-12">
+                    <div class="card-header">
+                        <h3 class="card-title">Restaurant Details: {{ restaurant.restaurant_id }}</h3>
+                    </div>
+                    <div class="card-body">
+
+                        <div class="form-group">
+                            <label class="form-label">Name</label>
+                            <label class="form-control disabled">{{ restaurant.name }}</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Email</label>
+                            <label class="form-control disabled">{{ restaurant.email }}</label>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label class="form-label">Restaurant Address:</label>
+                            <label class="form-control disabled">{{ restaurant.restaurant_address }}</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Restaurant Contact:</label>
+                            <label class="form-control disabled">{{ restaurant.restaurant_contact }}</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Food Description:</label>
+                            <label class="form-control disabled">{{ restaurant.food_description }}</label>
+                        </div>
+
+                    </div>
+
+                    <div class="card-footer">
+                        <a class="card-link" href="{% url "home_restaurant" %}">Back to list</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% else %}
+        <div class="alert alert-danger">The restaurant is invalid.</div>
+    {% endif %}
+{% endblock %}
