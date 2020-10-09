@@ -97,7 +97,7 @@ def __edit_if_post_method(context, menu_id: int, request: HttpRequest):
 def __get_create_menu_dto_from_request(request: HttpRequest) -> CreateMenuDto:
     create_menu_dto = CreateMenuDto()
     create_menu_dto.menu_version = request.POST["menu_version"]
-    __set_menu_attributes_from_request(create_menu_dto, request)
+    __set_menu_attributes_from_request_create(create_menu_dto, request)
     return create_menu_dto
 
 
@@ -111,12 +111,14 @@ def __get_edit_menu_dto_from_request(menu_id: int, request: HttpRequest) -> Edit
 def __set_menu_attributes_from_request(edit_menu_dto, request):
     edit_menu_dto.menu_version = request.POST["menu_version"]
     edit_menu_dto.other_details = request.POST["other_details"]
+    edit_menu_dto.image_url = request.POST["image_url"]
 
 
-def __set_menu_attributes_from_request(create_menu_dto, request):
+def __set_menu_attributes_from_request_create(create_menu_dto, request):
     create_menu_dto.menu_version = request.POST["menu_version"]
     create_menu_dto.other_details = request.POST["other_details"]
     create_menu_dto.date_of_creation = request.POST["date_of_creation"]
+    create_menu_dto.image_url = request.POST["image_url"]
 
 
 def __get_menu_details_dto_or_raise_404(menu_id) -> MenuDetailsDto:

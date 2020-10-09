@@ -4,29 +4,33 @@
     {% if menus %}
         <div class="row">
             <div class="col-md-8 offset-2">
-                <div class="card p-12 mt-5">
-                    <div class="form-group">
-                        <label class="form-label">Menu Version:</label>
-                        <label class="form-control disabled">{{ menus.menu_version }}</label>
+                <div class="card mt-5">
+                    <div class="card-header">
+                        <h3 class="card-title">Menu Details: {{ menus.menu_version }}</h3>
                     </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label class="form-label">Menu Version:</label>
+                            <label class="form-control disabled">{{ menus.menu_version }}</label>
+                        </div>
 
-                    <div class="form-group">
-                        <label class="form-label">Other Details:</label>
-                        <label class="form-control disabled">{{ menus.other_details }}</label>
+                        <div class="form-group">
+                            <label class="form-label">Other Details:</label>
+                            <label class="form-control disabled">{{ menus.other_details }}</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Date Of Creation:</label>
+                            <label class="form-control disabled">{{ menus.date_of_creation }}</label>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Image Url:</label>
+                            <label class="form-control disabled">{{ menus.image_url }}</label>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label class="form-label">Date Of Creation:</label>
-                        <label class="form-control disabled">{{ menus.date_of_creation }}</label>
-                    </div>
-
-                </div>
-
-                <div class="card-footer">
-                    <a class="card-link" href="{% url "home_menu" %}">Back to list</a>
                 </div>
             </div>
-        </div>
         </div>
     {% else %}
         <div class="alert alert-danger">The menu is invalid.</div>

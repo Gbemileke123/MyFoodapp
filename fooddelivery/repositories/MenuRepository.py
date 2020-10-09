@@ -99,6 +99,7 @@ class DjangoORMMenuRepository(MenuRepository):
             result.menu_version = menu.menu_version
             result.other_details = menu.other_details
             result.date_of_creation = menu.date_of_creation
+            result.image_url = menu.image_url
             return result
         except Menu.DoesNotExist as m:
             message = " Menu information does not exist"

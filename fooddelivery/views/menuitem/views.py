@@ -104,6 +104,7 @@ def __set_menuitem_attributes_from_request(edit_menuitem_dto, request):
     edit_menuitem_dto.item_description = request.POST["item_description"]
     edit_menuitem_dto.item_price = request.POST["item_price"]
     edit_menuitem_dto.other_details = request.POST["other_details"]
+    edit_menuitem_dto.image_url = request.POST["image_url"]
 
 
 def __get_menuitem_details_dto_or_raise_404(menuitem_id) -> MenuItemDetailsDto:

@@ -69,6 +69,7 @@ class DjangoORMMenuItemRepository(MenuItemRepository):
             menuitem.item_description = model.item_description
             menuitem.item_price = model.item_price
             menuitem.other_details = model.other_details
+            menuitem.image_url = model.image_url
             menuitem.save()
         except MenuItem.DoesNotExist as e:
             message = " the required menuitem does not exist"
@@ -94,7 +95,6 @@ class DjangoORMMenuItemRepository(MenuItemRepository):
             item.other_details = e["other_details"]
             item.menu_version = e['menu__menu_version']
             item.image_url = e['image_url']
-
             result.append(item)
         return result
 
