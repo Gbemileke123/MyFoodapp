@@ -4,42 +4,42 @@
 
 {% block content %}
 
-    {% if menuitem %}
+    {% if restaurant %}
         <div class="row">
-            <a href="{% url "create_restaurant" %}" class="page-link">Create new restaurant</a>
+            <a href="{% url "create_restaurant" %}" class="page-link mt-5">Create new restaurant</a>
         </div>
-        <table class="table table-bordered mt-4">
+        <table class="table table-bordered mt-5">
             <thead>
             <tr>
-                <th>Menu ID</th>
                 <th>Name</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Other Details</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Contact</th>
+                <th>Food Description</th>
 
                 <th colspan="2">Actions</th>
             </tr>
             </thead>
             <tbody>
-            {% for e in menuitem %}
+            {% for r in restaurant %}
                 <tr>
-                    <td>{{ e.menu_version }}</td>
-                    <td>{{ e.item_name }}</td>
-                    <td>{{ e.item_description }}</td>
-                    <td>{{ e.item_price }}</td>
-                    <td>{{ e.other_details }}</td>
+                    <td>{{ r.name }}</td>
+                    <td>{{ r.email }}</td>
+                    <td>{{ r.restaurant_address }}</td>
+                    <td>{{ r.restaurant_contact }}</td>
+                    <td>{{ r.food_description }}</td>
 
                     <td>
                         <div class="btn-group">
                             <a class="btn btn-sm btn-outline-info "
-                               href="{% url "view_menuitem" menuitem_id=e.id %}">View</a>
+                               href="{% url "view_restaurant" restaurant_id=r.id %}">View</a>
                             &nbsp;
                             <a class="btn btn-sm btn-outline-primary"
-                               href="{% url "edit_menuitem" menuitem_id=e.id %}">Edit</a>
+                               href="{% url "edit_restaurant" restaurant_id=r.id %}">Edit</a>
                             &nbsp;
                             {% csrf_token %}
                             <a class="btn btn-sm btn-outline-danger"
-                               href="{% url 'delete_menuitem' menuitem_id=e.id %}">Delete</a>
+                               href="{% url 'delete_restaurant' restaurant_id=r.id %}">Delete</a>
                         </div>
                     </td>
                 </tr>
@@ -47,6 +47,6 @@
             </tbody>
         </table>
     {% else %}
-        <div class="alert alert-danger">No existing menu item are available.</div>
+        <div class="alert alert-danger">No existing restaurant are available.</div>
     {% endif %}
 {% endblock %}

@@ -19,9 +19,10 @@ def restaurant_homepage(request):
 
 
 def home_restaurant(request):
-    menuitem = fooddelivery_service_container.menuitem_management_service().list()
+    restaurant = fooddelivery_service_container.restaurant_management_service().list()
     context = {
-        "menuitem": menuitem
+        "title": "Restaurant",
+        "restaurant": restaurant
     }
     return render(request, "fooddelivery/restaurant/home_restaurant.html", context)
 
@@ -48,15 +49,13 @@ def edit_restaurant(request, restaurant_id):
     return render(request, "fooddelivery/restaurant/edit_restaurant.html", context)
 
 
-@login_required(login_url='login')
 def create_restaurant(request):
-
     context = {
 
     }
     __create_if_post_method(context, request)
     if request.method == "POST" and context["saved"]:
-        return redirect("home_restaurant")
+        return redirect("login")
     return render(request, "fooddelivery/restaurant/create_restaurant.html", context)
 
 
