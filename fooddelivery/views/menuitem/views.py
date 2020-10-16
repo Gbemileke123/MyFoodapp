@@ -14,7 +14,7 @@ def home_menuitem(request):
         "title": "MenuItem",
         "menuitem": menuitem
     }
-    return render(request, "fooddelivery/restaurant/home_restaurant.html", context)
+    return render(request, "fooddelivery/menuitem/home_menuitem.html", context)
 
 
 def view_menuitem(request, menuitem_id):

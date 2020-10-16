@@ -48,6 +48,11 @@
 
     <section class="ftco-section">
         <div class="container">
+            <div class="row mt-3 mb-3">
+                <div class="col-12">
+                    <h1 class="text-center font-weight-bold">OUR SERVICES</h1>
+                </div>
+            </div>
             <div class="row no-gutters ftco-services">
                 <div class="col-md-3 text-center d-flex align-self-stretch ftco-animate">
                     <div class="media block-6 services mb-md-0 mb-4">
@@ -121,7 +126,7 @@
                         <div class="card-body">
                             <a href="{% url 'view_menu' menu_id=m.id %}">
                                 <img src="{{ m.image_url }}" alt="{{ m.menu_version }} Image"
-                                     class="img-fliud card-img">
+                                     class="img-fliud card-img"  width="300" height="250">
                             </a>
                         </div>
                     </div>
