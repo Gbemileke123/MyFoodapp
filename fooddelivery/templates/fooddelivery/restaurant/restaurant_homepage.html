@@ -61,10 +61,11 @@
                         <div class="card-body">
                             <a href="{% url 'view_menuitem' e.id %}">
                                 <img src="{{ e.image_url }}" alt="{{ e.item_name }} Image"
-                                class="img-fliud card-img" width="300" height="250">
-                                Price:{{ e.item_price }}
+                                     class="img-fliud card-img" width="300" height="250">
                             </a>
-
+                            <div class="card-footer">
+                                <p class="text-center">Price {{ e.item_price }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
