@@ -20,15 +20,21 @@ On this application, the vendor’s owner will be able to ADD/EDIT/UPDATE/DELETE
 ADMIN
 
 •         The admin can handle all customers and restaurants owners.
+
 •         The admin can ADD/EDIT/UPDATE/DELETE restaurant records and user records.
+
 •         They can manage food categories, manage payment and can track order records.
  
 APP NAVIGATION
 
 1: Every new user you can view the restaurant product and chect the available meals.
+
 2: The ability for every user to login and access what the restuarant has unfortunately users can not make order still working on creating different endpoints which will connect both the restaurant and delievery together.
+
 3: For every user on this app, users are authenticated to access the home page, view and make order(not implemented yet).
+
 4: A restaurant owner can create a restuarant, create a menu and menuitem, edit likewise he or she can add image url to both menu and menuitem. For every restaurant a login is required for them to access their restaurant.
+
 5: For staff which is admin, they can create, edit, delete and also create a role for all other staff.
 The superuser can assign permission to all users and admin too.
 
