@@ -27,10 +27,10 @@ class MenuRepository(metaclass=ABCMeta):
         """Gets list of a menu"""
         raise NotImplementedError
 
-    @abstractmethod
-    def delete(self, menu_id: int):
-        """Deletes a menu object"""
-        raise NotImplementedError
+    # @abstractmethod
+    # def delete(self, menu_id: int):
+    #     """Deletes a menu object"""
+    #     raise NotImplementedError #TODO May need to optimize later
 
     @abstractmethod
     def get(self, menu_id: int):
@@ -49,6 +49,7 @@ class DjangoORMMenuRepository(MenuRepository):
         menu.other_details = model.other_details
         menu.date_of_creation = model.date_of_creation
         menu.image_url = model.image_url
+        menu.restaurant_id = model.restaurant_id
         menu.save()
 
     def edit(self, menu_id: int, model: EditMenuDto):
@@ -70,6 +71,7 @@ class DjangoORMMenuRepository(MenuRepository):
                                         "other_details",
                                         "date_of_creation",
                                         "image_url",
+                                        "restaurant"
         ))
         result: List[ListMenuDto] = []
         for m in menu:
@@ -79,17 +81,18 @@ class DjangoORMMenuRepository(MenuRepository):
             item.other_details = m["other_details"]
             item.date_of_creation = m["date_of_creation"]
             item.image_url = m['image_url']
+            item.restaurant = m['restaurant']
             result.append(item)
         return result
 
-    def delete(self, menu_id: int):
-        try:
-            menu = Menu.objects.get(id=menu_id)
-            menu.delete()
-        except Menu.DoesNotExist as m:
-            message = " Menu information does not exist"
-            print(message)
-            raise m
+    # def delete(self, menu_id: int):
+    #     try:
+    #         menu = Menu.objects.get(id=menu_id)
+    #         menu.delete()
+    #     except Menu.DoesNotExist as m:
+    #         message = " Menu information does not exist"
+    #         print(message)
+    #         raise m #TODO May need to optimize later
 
     def get(self, menu_id: int):
         try:
@@ -100,6 +103,7 @@ class DjangoORMMenuRepository(MenuRepository):
             result.other_details = menu.other_details
             result.date_of_creation = menu.date_of_creation
             result.image_url = menu.image_url
+            result.restaurant = menu.restaurant
             return result
         except Menu.DoesNotExist as m:
             message = " Menu information does not exist"

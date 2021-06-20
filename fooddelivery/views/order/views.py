@@ -1,7 +1,7 @@
 from django.http import Http404, HttpRequest, JsonResponse
 from django.shortcuts import render, redirect
 
-from fooddelivery.dto.MealDto import CreateMealDto, EditMealDto, ListMealDto, MealDetailsDto
+from fooddelivery.dto.OrderDto import CreateOrderDto, EditOrderDto, ListOrderDto, OrderDetailsDto
 from fooddelivery.models import Order
 from fooddelivery.service_factory import fooddelivery_service_container
 
@@ -74,7 +74,7 @@ def __create_if_post_method(context, request):
             context["saved"] = False
 
 
-def __edit_if_post_method(context, meal_id: int, request: HttpRequest) -> MealDetailsDto:
+def __edit_if_post_method(context, meal_id: int, request: HttpRequest) -> OrderDetailsDto:
     if request.method == "POST":
         try:
             meal = __get_edit_meal_dto_from_request(meal_id, request)
@@ -86,15 +86,15 @@ def __edit_if_post_method(context, meal_id: int, request: HttpRequest) -> MealDe
             context["saved"] = False
 
 
-def __get_create_meal_dto_from_request(request: HttpRequest) -> CreateMealDto:
-    create_meal_dto = CreateMealDto()
+def __get_create_meal_dto_from_request(request: HttpRequest) -> CreateOrderDto:
+    create_meal_dto = CreateOrderDto()
     create_meal_dto.status = request.POST["status"]
     __set_meal_attributes_from_request(create_meal_dto, request)
     return create_meal_dto
 
 
-def __get_edit_meal_dto_from_request(meal_id: int, request: HttpRequest) -> EditMealDto:
-    edit_meal_dto = EditMealDto()
+def __get_edit_meal_dto_from_request(meal_id: int, request: HttpRequest) -> EditOrderDto:
+    edit_meal_dto = EditOrderDto()
     edit_meal_dto.id = meal_id
     __set_meal_attributes_from_request(edit_meal_dto, request)
     return edit_meal_dto
@@ -111,7 +111,7 @@ def __set_meal_attributes_from_request(edit_meal_dto, request):
     edit_meal_dto.order_time = request.POST["order_time"]
 
 
-def __get_meal_details_dto_or_raise_404(meal_id) -> MealDetailsDto:
+def __get_meal_details_dto_or_raise_404(meal_id) -> OrderDetailsDto:
     try:
         meal = fooddelivery_service_container.meal_management_service().get(meal_id=meal_id)
     except Order.DoesNotExist:

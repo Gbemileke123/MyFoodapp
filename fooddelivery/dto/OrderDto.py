@@ -1,4 +1,7 @@
-class CreateMealDto:
+from fooddelivery.models import MenuItem, Customer
+
+
+class CreateOrderDto:
     menuitem_id: int
     customers_id: int
     status: str
@@ -9,7 +12,7 @@ class CreateMealDto:
     order_time: str
 
 
-class EditMealDto:
+class EditOrderDto:
     id: int
     menuitem_id: int
     customers_id: int
@@ -19,10 +22,10 @@ class EditMealDto:
     rate: float
 
 
-class ListMealDto:
+class ListOrderDto:
     id: int
-    menuitem_id: int
-    customers_id: int
+    menuitem: MenuItem
+    customer: Customer
     status: str
     address: str
     quantity: int
@@ -31,10 +34,11 @@ class ListMealDto:
     order_time: str
 
 
-class MealDetailsDto:
+class OrderDetailsDto:
     id: int
-    menuitem_id: int
-    customers_id: int
+    menuitem: MenuItem
+    customer: Customer
+    status: str
     status: str
     address: str
     quantity: int
