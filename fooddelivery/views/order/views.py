@@ -2,14 +2,14 @@ from django.http import Http404, HttpRequest, JsonResponse
 from django.shortcuts import render, redirect
 
 from fooddelivery.dto.MealDto import CreateMealDto, EditMealDto, ListMealDto, MealDetailsDto
-from fooddelivery.models import Meal
+from fooddelivery.models import Order
 from fooddelivery.service_factory import fooddelivery_service_container
 
 
 def home_meal(request):
     meals = fooddelivery_service_container.meal_management_service().list()
     context = {
-        "title": "Meal",
+        "title": "Order",
         "meals": meals
     }
     return render(request, "fooddelivery/meal/home_meal.html", context)
@@ -18,8 +18,8 @@ def home_meal(request):
 def view_meal(request, meal_id):
     meal = __get_meal_details_dto_or_raise_404(meal_id)
     context = {
-        "title": f"Meal {meal.status}",
-        "meal": meal
+        "title": f"Order {meal.status}",
+        "order": meal
     }
     return render(request, "fooddelivery/meal/view_meal.html", context)
 
@@ -29,15 +29,15 @@ def edit_meal(request, meal_id):
     customer = fooddelivery_service_container.customer_management_service().get_all_for_select_list()
     menuitem = fooddelivery_service_container.menuitem_management_service().get_all_for_select_list()
     context = {
-        "title": f"Edit Meal {meal_details_dto.status}",
+        "title": f"Edit Order {meal_details_dto.status}",
         "meal_id": meal_id,
-        "meal": meal_details_dto,
+        "order": meal_details_dto,
         "customer": customer,
         "menuitem": menuitem
     }
     new_meal_details_dto = __edit_if_post_method(context, meal_id, request)
     if new_meal_details_dto is not None:
-        context["meal"] = new_meal_details_dto
+        context["order"] = new_meal_details_dto
     return render(request, "fooddelivery/meal/edit_meal.html", context)
 
 
@@ -59,7 +59,7 @@ def delete(request, meal_id):
         fooddelivery_service_container.meal_management_service().delete(meal_id)
         return redirect("home")
     except Exception:
-        raise Http404("No such meal exist")
+        raise Http404("No such order exist")
 
 
 def __create_if_post_method(context, request):
@@ -114,6 +114,6 @@ def __set_meal_attributes_from_request(edit_meal_dto, request):
 def __get_meal_details_dto_or_raise_404(meal_id) -> MealDetailsDto:
     try:
         meal = fooddelivery_service_container.meal_management_service().get(meal_id=meal_id)
-    except Meal.DoesNotExist:
-        raise Http404("The request meal does not exist")
+    except Order.DoesNotExist:
+        raise Http404("The request order does not exist")
     return meal

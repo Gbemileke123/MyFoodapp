@@ -3,7 +3,7 @@ from .views import home
 urlpatterns = [
     path('', include('fooddelivery.views.userLogin.urls')),
     path('customer/', include('fooddelivery.views.customer.urls')),
-    path('meal/', include('fooddelivery.views.meal.urls')),
+    path('order/', include('fooddelivery.views.order.urls')),
     path('menu/', include('fooddelivery.views.menu.urls')),
     path('menuitem/', include('fooddelivery.views.menuitem.urls')),
     path('restaurant/', include('fooddelivery.views.restaurant.urls')),

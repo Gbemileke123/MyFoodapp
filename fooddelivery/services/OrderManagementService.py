@@ -3,7 +3,7 @@ from typing import List
 
 from fooddelivery.dto.CommonDto import SelectOptionDto
 from fooddelivery.dto.MealDto import CreateMealDto, EditMealDto, ListMealDto, MealDetailsDto
-from fooddelivery.repositories.MealRepository import MealRepository
+from fooddelivery.repositories.OrderRepository import MealRepository
 
 
 class MealManagementService(metaclass=ABCMeta):
