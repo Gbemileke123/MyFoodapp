@@ -1,13 +1,13 @@
 from dependency_injector import containers, providers
 
 from fooddelivery.repositories.CustomersRepository import CustomersRepository, DjangoORMCustomersRepository
-from fooddelivery.repositories.OrderRepository import MealRepository, DjangoORMnMealRepository
+from fooddelivery.repositories.OrderRepository import OrderRepository, DjangoORMnOrderRepository
 from fooddelivery.repositories.MenuRepository import MenuRepository, DjangoORMMenuRepository
 from fooddelivery.repositories.MenuItemRepository import MenuItemRepository, DjangoORMMenuItemRepository
 from fooddelivery.repositories.RestaurantRepository import RestaurantRepository, DjangoORMRestaurantRepository
 from fooddelivery.repositories.StaffRepository import StaffRepository, DjangoORMStaffRepository
 from fooddelivery.services.CustomerManagementService import DefaultCustomerManagementService, CustomerManagementService
-from fooddelivery.services.OrderManagementService import DefaultMealManagementService, MealManagementService
+from fooddelivery.services.OrderManagementService import DefaultMealManagementService, OrderManagementService
 from fooddelivery.services.MenuManagementService import DefaultMenuManagementService, MenuManagementService
 from fooddelivery.services.MenuItemManagementService import DefaultMenuItemManagementService, MenuItemManagementService
 from fooddelivery.services.RestaurantManagementService import DefaultRestaurantManagementService, \
@@ -23,8 +23,8 @@ class Container(containers.DeclarativeContainer):
         DjangoORMCustomersRepository
     )
 
-    meal_repository: Callable[[], MealRepository] = providers.Factory(
-        DjangoORMnMealRepository
+    meal_repository: Callable[[], OrderRepository] = providers.Factory(
+        DjangoORMnOrderRepository
     )
 
     menuitem_repository: Callable[[], MenuItemRepository] = providers.Factory(
@@ -48,7 +48,7 @@ class Container(containers.DeclarativeContainer):
         repository=customer_repository
     )
 
-    meal_management_service: Callable[[], MealManagementService] = providers.Factory(
+    meal_management_service: Callable[[], OrderManagementService] = providers.Factory(
         DefaultMealManagementService,
         repository=meal_repository
     )
