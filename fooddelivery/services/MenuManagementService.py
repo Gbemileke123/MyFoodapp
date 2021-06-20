@@ -3,6 +3,7 @@ from typing import List
 
 from fooddelivery.dto.CommonDto import SelectOptionDto
 from fooddelivery.dto.MenuDto import CreateMenuDto, EditMenuDto, ListMenuDto, MenuDetailsDto
+from fooddelivery.models import Restaurant
 from fooddelivery.repositories.MenuRepository import MenuRepository
 
 
@@ -13,7 +14,7 @@ class MenuManagementService(metaclass=ABCMeta):
         raise NotImplementedError
 
     @abstractmethod
-    def create(self, model: CreateMenuDto):
+    def create(self, model: CreateMenuDto, user_id: int):
         """Creates a menu object"""
         raise NotImplementedError
 
@@ -47,7 +48,10 @@ class DefaultMenuManagementService(MenuManagementService):
     def get_all_for_select_list(self) -> List[SelectOptionDto]:
         return self.repository.get_all_for_select_list()
 
-    def create(self, model: CreateMenuDto):
+    def create(self, model: CreateMenuDto, user_id: int):
+        restaurant = Restaurant.objects.get(
+            owner_id=user_id)  # TODO need to remove this to use the method through restaurant repository
+        model.restaurant_id = restaurant.id
         return self.repository.create(model)
 
     def edit(self, id: int, model: EditMenuDto):

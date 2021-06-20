@@ -31,7 +31,6 @@ def view_menu(request, menu_id):
 
 
 def create_menu(request):
-
     context = {
 
     }
@@ -75,7 +74,8 @@ def __create_if_post_method(context, request):
     if request.method == "POST":
         try:
             menu = __get_create_menu_dto_from_request(request)
-            fooddelivery_service_container.menu_management_service().create(menu)
+            owner_id = request.user.id
+            fooddelivery_service_container.menu_management_service().create(menu, user_id=owner_id)
             context["saved"] = True
         except Exception as m:
             print(m)
