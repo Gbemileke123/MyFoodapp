@@ -17,6 +17,7 @@ class Menu(models.Model):
     other_details = models.CharField(max_length=200)
     date_of_creation = models.DateTimeField(auto_now_add=True)
     image_url = models.URLField(max_length=500)
+    restaurant = models.ForeignKey("Restaurant", on_delete=models.RESTRICT, null=True)
 
     def __str__(self):
         return f"{self.menu_version}: {self.other_details}\t{self.date_of_creation}\t{self.image_url}"
@@ -55,12 +56,12 @@ class Staff(models.Model):
         return f"{self.user}: {self.staff_address}\t{self.staff_contact}"
 
 
-class Meal(models.Model):
-    menuitem = models.ForeignKey(MenuItem, on_delete=models.RESTRICT)
-    customers = models.ManyToManyField(Customer, blank=True)
+class Order(models.Model):
+    menuitem = models.ManyToManyField(MenuItem)
+    customers = models.ForeignKey(Customer, blank=True, on_delete=models.RESTRICT, null=True)
     status = models.CharField(max_length=200, default=False)
     address = models.CharField(max_length=200, default=False)
     quantity = models.IntegerField()
     rate = models.DecimalField(max_digits=50, decimal_places=5)
-    order_date = models.CharField(max_length=6)
-    order_time = models.CharField(max_length=6)
+    date = models.DateField(auto_now=True)
+    time = models.TimeField(auto_now=True)

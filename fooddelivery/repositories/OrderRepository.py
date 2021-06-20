@@ -3,7 +3,7 @@ from typing import List
 
 from fooddelivery.dto.CommonDto import SelectOptionDto
 from fooddelivery.dto.MealDto import CreateMealDto, EditMealDto, ListMealDto, MealDetailsDto
-from fooddelivery.models import Meal
+from fooddelivery.models import Order
 
 
 class MealRepository(metaclass=ABCMeta):
@@ -39,11 +39,11 @@ class MealRepository(metaclass=ABCMeta):
 
 class DjangoORMnMealRepository(MealRepository):
     def get_all_for_select_list(self) -> List[SelectOptionDto]:
-        meals = Meal.objects.values("id", "status")
+        meals = Order.objects.values("id", "status")
         return [SelectOptionDto(meal["id"], meal["status"]) for meal in meals]
 
     def create(self, model: CreateMealDto):
-        meal = Meal()
+        meal = Order()
         meal.menuitem_id = model.menuitem_id
         meal.customer_id = model.customers_id
         meal.status = model.status
@@ -56,7 +56,7 @@ class DjangoORMnMealRepository(MealRepository):
 
     def edit(self, meal_id: int, model: EditMealDto):
         try:
-            meal = Meal.objects.get(id=id)
+            meal = Order.objects.get(id=id)
             meal.menuitem_id = model.menuitem_id
             meal.customer_id = model.customers_id
             meal.status = model.status
@@ -64,13 +64,13 @@ class DjangoORMnMealRepository(MealRepository):
             meal.quantity = model.quantity
             meal.rate = model.rate
             meal.save()
-        except Meal.DoesNotExist as meal:
-            message = "Tried meal does not exist"
+        except Order.DoesNotExist as meal:
+            message = "Tried order does not exist"
             print(message)
             raise meal
 
     def list(self) -> List[ListMealDto]:
-        meals = list(Meal.objects.values("id",
+        meals = list(Order.objects.values("id",
                                          "menuitem_id",
                                          "customer_id",
                                          "status",
@@ -79,7 +79,7 @@ class DjangoORMnMealRepository(MealRepository):
                                          "rate",
                                          "order_date",
                                          "order_time",
-                                         ))
+                                          ))
         result: List[ListMealDto] = []
         for meal in meals:
             item = ListMealDto()
@@ -97,16 +97,16 @@ class DjangoORMnMealRepository(MealRepository):
 
     def delete(self, meal_id: int):
         try:
-            meals = Meal.objects.get(id=meal_id)
+            meals = Order.objects.get(id=meal_id)
             meals.delete(meal_id)
-        except Meal.DoesNotExist as meal:
-            message = "Tried meal but does not exist"
+        except Order.DoesNotExist as meal:
+            message = "Tried order but does not exist"
             print(message)
             raise meal
 
     def get(self, meal_id: int):
         try:
-            meal = Meal.objects.select_related("menuitem", "customer").get(id=meal_id)
+            meal = Order.objects.select_related("menuitem", "customer").get(id=meal_id)
             result = MealDetailsDto()
             result.menuitem_id = meal.menuitem_id
             result.customer_id = meal.customer_id
@@ -117,7 +117,7 @@ class DjangoORMnMealRepository(MealRepository):
             result.order_date = meal.order_date
             result.order_time = meal.order_time
             return result
-        except Meal.DoesNotExist as meal:
-            message = "Tried meal but does not exist"
+        except Order.DoesNotExist as meal:
+            message = "Tried order but does not exist"
             print(message)
             raise meal

@@ -1,4 +1,4 @@
-from fooddelivery.views.meal import views
+from fooddelivery.views.order import views
 from django.urls import path
 
 

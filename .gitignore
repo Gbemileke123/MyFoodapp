@@ -1,6 +1,7 @@
 
 .idea/
-
+myfoodapp/.env
+fooddelivery/migrations
 # Created by https://www.gitignore.io/api/macos,linux,django,python,pycharm
 
 ### Django ###
@@ -195,7 +196,7 @@ celerybeat-schedule
 *.sage.py
 
 # dotenv
-.env
+myfoodapp/.env
 
 # virtualenv
 .venv
